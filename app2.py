@@ -1,11 +1,11 @@
 import streamlit as st
 from datetime import datetime
 
-# Inicializar el estado de los botones
-if 'boton_presionado' not in st.session_state:
-    st.session_state.boton_presionado = None
+# Inicializar el estado de los botones de forma correcta
+if "mensaje" not in st.session_state:
+    st.session_state["mensaje"] = ""
 
-# Estilo CSS para mejorar la interfaz
+# Estilo CSS
 st.markdown(
     """
     <style>
@@ -43,19 +43,18 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Título principal
+# Título
 st.markdown('<h1 class="title">Carta para Catita 💖</h1>', unsafe_allow_html=True)
 
-# Botón de prueba para desbloquear antes de la fecha real
-if st.button("🔑 Desbloquear (Solo Prueba)"):
-    fecha_actual = datetime(2025, 3, 8, 12, 0)  # Simula el 8 de marzo a las 12:00
-else:
-    fecha_actual = datetime.now()  # Usa la fecha real si no presionas el botón
-
-# Fecha real de desbloqueo
+# Fecha de desbloqueo
+fecha_actual = datetime.now()
 fecha_desbloqueo = datetime(2025, 3, 8, 12, 0)
 
-# Verificar si la fecha ya llegó
+# Botón de prueba para desbloquear antes de tiempo
+if st.button("🔑 Desbloquear (Solo Prueba)"):
+    fecha_actual = fecha_desbloqueo  # Fuerza la fecha a ser el 8 de marzo
+
+# Verificar si ya se puede acceder
 if fecha_actual < fecha_desbloqueo:
     st.markdown('<p class="message">Oh, mi niña, todavía no es el tiempo. ⏳</p>', unsafe_allow_html=True)
 else:
@@ -64,36 +63,45 @@ else:
     # Contenedor de botones
     st.markdown('<div class="button-container">', unsafe_allow_html=True)
 
+    # Función para actualizar el mensaje
+    def mostrar_mensaje(texto):
+        st.session_state["mensaje"] = texto
+
     # Botón 1: ¿Por qué me enamoré de ti?
     if st.button("💘 ¿Por qué me enamoré de ti?"):
-        st.session_state.boton_presionado = "razon"
+        mostrar_mensaje(
+            "Me enamoré de ti porque, desde que comenzamos a hablar, sentí una conexión única. "
+            "Nuestra primera salida me puso nervioso como nunca antes, y supe que eras la mujer que quería en mi vida. "
+            "Aunque a veces te hagas la dura, eres una niña increíble que se preocupa por su futuro, y eso me encanta. ❤️"
+        )
+
     # Botón 2: Lo que más amo de ti
     if st.button("😍 Lo que más amo de ti"):
-        st.session_state.boton_presionado = "amo"
+        mostrar_mensaje(
+            "Amo tus ojos, tus abrazos, aunque a veces seas un poco distante con el cariño. "
+            "Me encanta cómo con una sola palabra puedes mejorar mi día. "
+            "Amo tu forma única de ser, incluyendo tus mañas, porque eres única en todos los sentidos. 💕"
+        )
+
     # Botón 3: Nuestro futuro juntos
     if st.button("🌍 Nuestro futuro juntos"):
-        st.session_state.boton_presionado = "futuro"
+        mostrar_mensaje(
+            "Waaa, esto es lo que más me gusta hablar contigo. Me imagino un futuro juntos lleno de momentos hermosos, "
+            "puro leseo y cumpliendo nuestros sueños. Quiero estar contigo en todo, apoyarte y amarte cada día. "
+            "Ah, y lo de ir al sur... ¡sí o sí! 😂❤️"
+        )
+
     # Botón 4: Feliz día
     if st.button("🌹 Feliz día"):
-        st.session_state.boton_presionado = "feliz"
+        mostrar_mensaje(
+            "Feliz Día de la Mujer, mi niña preciosa. 🌸 "
+            "Eres una persona maravillosa, fuerte, luchadora y llena de luz. "
+            "Nunca dejes que nadie apague esa chispa que tienes. "
+            "Hoy es tu día, y quiero recordarte cuánto te amo y admiro. 💖"
+        )
 
-    # Mostrar el mensaje correcto según el botón presionado
-    if st.session_state.boton_presionado == "razon":
-        st.write("Me enamoré de ti porque, desde que comenzamos a hablar, sentí una conexión única. "
-                 "Nuestra primera salida me puso nervioso como nunca antes, y supe que eras la mujer que quería en mi vida. "
-                 "Aunque a veces te hagas la dura, eres una niña increíble que se preocupa por su futuro, y eso me encanta. ❤️")
-    elif st.session_state.boton_presionado == "amo":
-        st.write("Amo tus ojos, tus abrazos, aunque a veces seas un poco distante con el cariño. "
-                 "Me encanta cómo con una sola palabra puedes mejorar mi día. "
-                 "Amo tu forma única de ser, incluyendo tus mañas, porque eres única en todos los sentidos. 💕")
-    elif st.session_state.boton_presionado == "futuro":
-        st.write("Waaa, esto es lo que más me gusta hablar contigo. Me imagino un futuro juntos lleno de momentos hermosos, "
-                 "puro leseo y cumpliendo nuestros sueños. Quiero estar contigo en todo, apoyarte y amarte cada día. "
-                 "Ah, y lo de ir al sur... ¡sí o sí! 😂❤️")
-    elif st.session_state.boton_presionado == "feliz":
-        st.write("Feliz Día de la Mujer, mi niña preciosa. 🌸 "
-                 "Eres una persona maravillosa, fuerte, luchadora y llena de luz. "
-                 "Nunca dejes que nadie apague esa chispa que tienes. "
-                 "Hoy es tu día, y quiero recordarte cuánto te amo y admiro. 💖")
-    
+    # Mostrar el mensaje seleccionado
+    if st.session_state["mensaje"]:
+        st.markdown(f'<p class="message">{st.session_state["mensaje"]}</p>', unsafe_allow_html=True)
+
     st.markdown('</div>', unsafe_allow_html=True)
