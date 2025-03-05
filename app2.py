@@ -1,59 +1,84 @@
 import streamlit as st
-import datetime
+from datetime import datetime
 
-# Definir la fecha de desbloqueo (8 de marzo a las 12:00)
-unlock_date = datetime.datetime(2025, 3, 8, 12, 0)
+# Estilo CSS para mejorar el diseño
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #ffebf0;
+        font-family: Arial, sans-serif;
+    }
+    .title {
+        color: #d6336c;
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+    }
+    .message {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 20px;
+    }
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .stButton>button {
+        background-color: #d6336c;
+        color: white;
+        font-size: 18px;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 10px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-# Obtener la fecha y hora actual
-current_time = datetime.datetime.now()
+# Título principal
+st.markdown('<h1 class="title">Carta para Catita 💖</h1>', unsafe_allow_html=True)
 
-# Si aún no es la fecha de desbloqueo, mostrar el mensaje de espera
-if current_time < unlock_date:
-    st.title("Oh, mi niña, todavía no es el tiempo ⏳")
-    st.write(f"La página se desbloqueará el {unlock_date.strftime('%d de marzo a las %H:%M')}.")
+# Botón de prueba para desbloquear antes de la fecha real
+if st.button("🔑 Desbloquear (Solo Prueba)"):
+    fecha_actual = datetime(2025, 3, 8, 12, 0)  # Simula el 8 de marzo a las 12:00
 else:
-    # Página desbloqueada
-    st.title("🌸 ¡Feliz Día, Mi Amor! 🌸")
-    st.write("Selecciona un botón para leer tu mensaje especial:")
+    fecha_actual = datetime.now()  # Usa la fecha real si no presionas el botón
 
-    # Estilos CSS
-    st.markdown("""
-        <style>
-            body {
-                background-color: #ffebf0;
-                text-align: center;
-                font-family: Arial, sans-serif;
-            }
-            .stButton>button {
-                background-color: #ff66b2;
-                color: white;
-                font-size: 18px;
-                padding: 10px;
-                border-radius: 10px;
-                border: none;
-                cursor: pointer;
-                margin: 10px;
-            }
-            .stButton>button:hover {
-                background-color: #ff3385;
-            }
-        </style>
-    """, unsafe_allow_html=True)
+# Fecha real de desbloqueo
+fecha_desbloqueo = datetime(2025, 3, 8, 12, 0)
 
-    # Botones con mensajes
-    if st.button("💖 ¿Por qué me enamoré de ti? 💖"):
-        st.write("Me enamoré de ti porque desde el principio hubo una conexión única. En nuestra primera salida, "
-                 "yo estaba tan nervioso, algo que nunca me había pasado antes. Supe de inmediato que eras la mujer que quiero en mi vida.")
+# Verificar si la fecha ya llegó
+if fecha_actual < fecha_desbloqueo:
+    st.markdown('<p class="message">Oh, mi niña, todavía no es el tiempo. ⏳</p>', unsafe_allow_html=True)
+else:
+    st.markdown('<p class="message">¡Bienvenida, mi amor! 💖</p>', unsafe_allow_html=True)
+    
+    # Contenedor de botones
+    st.markdown('<div class="button-container">', unsafe_allow_html=True)
+    
+    if st.button("💘 ¿Por qué me enamoré de ti?"):
+        st.write("Me enamoré de ti porque, desde que comenzamos a hablar, sentí una conexión única. "
+                 "Nuestra primera salida me puso nervioso como nunca antes, y supe que eras la mujer que quería en mi vida. "
+                 "Aunque a veces te hagas la dura, eres una niña increíble que se preocupa por su futuro, y eso me encanta. ❤️")
 
-    if st.button("😍 Lo que más amo de ti 😍"):
-        st.write("Amo tus ojos, tus abrazos (aunque a veces seas un poco distante con el cariño), "
-                 "y cómo con una sola palabra puedes mejorar mi día. Amo cada maña tuya, porque eres única en todos los sentidos.")
+    if st.button("😍 Lo que más amo de ti"):
+        st.write("Amo tus ojos, tus abrazos, aunque a veces seas un poco distante con el cariño. "
+                 "Me encanta cómo con una sola palabra puedes mejorar mi día. "
+                 "Amo tu forma única de ser, incluyendo tus mañas, porque eres única en todos los sentidos. 💕")
 
-    if st.button("🌍 Nuestro futuro juntos 🌍"):
-        st.write("Lo que más me encanta imaginar es nuestro futuro juntos, lleno de momentos felices, "
-                 "cumpliendo nuestros sueños y apoyándonos siempre. ¡Y obvio, el viaje al sur sí o sí! 😂")
+    if st.button("🌍 Nuestro futuro juntos"):
+        st.write("Waaa, esto es lo que más me gusta hablar contigo. Me imagino un futuro juntos lleno de momentos hermosos, "
+                 "puro leseo y cumpliendo nuestros sueños. Quiero estar contigo en todo, apoyarte y amarte cada día. "
+                 "Ah, y lo de ir al sur... ¡sí o sí! 😂❤️")
 
-    if st.button("🎉 Feliz Día 🎉"):
-        st.write("Mi amor, en este día especial quiero recordarte lo increíble que eres. No solo eres la mejor pareja, "
-                 "sino una mujer fuerte, inteligente y maravillosa. Gracias por ser parte de mi vida. ¡Te amo! 💖")
-
+    if st.button("🌹 Feliz día"):
+        st.write("Feliz Día de la Mujer, mi niña preciosa. 🌸 "
+                 "Eres una persona maravillosa, fuerte, luchadora y llena de luz. "
+                 "Nunca dejes que nadie apague esa chispa que tienes. "
+                 "Hoy es tu día, y quiero recordarte cuánto te amo y admiro. 💖")
+    
+    st.markdown('</div>', unsafe_allow_html=True)
