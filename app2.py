@@ -1,6 +1,16 @@
 import streamlit as st
 from datetime import datetime
 
+# Inicializar estado de los botones si no existen
+if 'mostrar_razon' not in st.session_state:
+    st.session_state.mostrar_razon = False
+if 'mostrar_amo' not in st.session_state:
+    st.session_state.mostrar_amo = False
+if 'mostrar_futuro' not in st.session_state:
+    st.session_state.mostrar_futuro = False
+if 'mostrar_feliz' not in st.session_state:
+    st.session_state.mostrar_feliz = False
+
 # Estilo CSS para mejorar el diseño
 st.markdown(
     """
@@ -60,22 +70,34 @@ else:
     # Contenedor de botones
     st.markdown('<div class="button-container">', unsafe_allow_html=True)
     
+    # Botón 1: ¿Por qué me enamoré de ti?
     if st.button("💘 ¿Por qué me enamoré de ti?"):
+        st.session_state.mostrar_razon = True
+    if st.session_state.mostrar_razon:
         st.write("Me enamoré de ti porque, desde que comenzamos a hablar, sentí una conexión única. "
                  "Nuestra primera salida me puso nervioso como nunca antes, y supe que eras la mujer que quería en mi vida. "
                  "Aunque a veces te hagas la dura, eres una niña increíble que se preocupa por su futuro, y eso me encanta. ❤️")
 
+    # Botón 2: Lo que más amo de ti
     if st.button("😍 Lo que más amo de ti"):
+        st.session_state.mostrar_amo = True
+    if st.session_state.mostrar_amo:
         st.write("Amo tus ojos, tus abrazos, aunque a veces seas un poco distante con el cariño. "
                  "Me encanta cómo con una sola palabra puedes mejorar mi día. "
                  "Amo tu forma única de ser, incluyendo tus mañas, porque eres única en todos los sentidos. 💕")
 
+    # Botón 3: Nuestro futuro juntos
     if st.button("🌍 Nuestro futuro juntos"):
+        st.session_state.mostrar_futuro = True
+    if st.session_state.mostrar_futuro:
         st.write("Waaa, esto es lo que más me gusta hablar contigo. Me imagino un futuro juntos lleno de momentos hermosos, "
                  "puro leseo y cumpliendo nuestros sueños. Quiero estar contigo en todo, apoyarte y amarte cada día. "
                  "Ah, y lo de ir al sur... ¡sí o sí! 😂❤️")
 
+    # Botón 4: Feliz día
     if st.button("🌹 Feliz día"):
+        st.session_state.mostrar_feliz = True
+    if st.session_state.mostrar_feliz:
         st.write("Feliz Día de la Mujer, mi niña preciosa. 🌸 "
                  "Eres una persona maravillosa, fuerte, luchadora y llena de luz. "
                  "Nunca dejes que nadie apague esa chispa que tienes. "
