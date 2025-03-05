@@ -56,7 +56,7 @@ if not st.session_state["acceso_concedido"]:
     if st.button("Desbloquear"):
         if clave_ingresada == CLAVE_CORRECTA:
             st.session_state["acceso_concedido"] = True
-            st.experimental_rerun()
+            st.rerun()  # Reemplazo de st.experimental_rerun()
         else:
             st.error("❌ Clave incorrecta. Inténtalo de nuevo.")
 
